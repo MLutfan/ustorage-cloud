@@ -21,12 +21,26 @@ $query_files = "SELECT * FROM files WHERE user_id = '$user_id' AND status = 'act
 $result_files = $conn->query($query_files);
 
 // Menghitung total ukuran storage yang terpakai (Opsional untuk UI)
+// Menghitung total ukuran storage yang terpakai
 $total_size = 0;
 $query_size = "SELECT SUM(file_size) as total FROM files WHERE user_id = '$user_id' AND status = 'active'";
 $size_result = $conn->query($query_size);
 if ($size_row = $size_result->fetch_assoc()) {
     $total_size = $size_row['total'] ? round($size_row['total'] / (1024 * 1024), 2) : 0; // dalam MB
 }
+
+// === TAMBAHAN LOGIKA PROGRESS BAR ===
+// Tentukan batas maksimal penyimpanan (Misal: 50 GB = 51200 MB)
+$max_storage_mb = 51200; 
+
+// Hitung persentase (Mencegah error pembagian nol dan membatasi maksimal 100%)
+$percentage = ($total_size > 0) ? ($total_size / $max_storage_mb) * 100 : 0;
+if ($percentage > 100) { $percentage = 100; }
+if ($percentage < 1 && $total_size > 0) { $percentage = 1; } // Beri minimal 1% jika ada file agar bar sedikit terlihat
+
+// Hitung sisa kapasitas dalam GB
+$sisa_storage_gb = round(($max_storage_mb - $total_size) / 1024, 2);
+// ===================================
 ?>
 
 <!DOCTYPE html>
@@ -110,10 +124,14 @@ if ($size_row = $size_result->fetch_assoc()) {
                         <span class="text-4xl font-spartan font-bold text-u-text-light"><?= $total_size ?></span>
                         <span class="text-u-text-muted pb-1">MB</span>
                     </div>
-                    <div class="w-full bg-u-dark rounded-full h-2.5 mb-2">
-                        <div class="bg-gradient-to-r from-emerald-400 to-u-neon h-2.5 rounded-full" style="width: 45%"></div>
+                    
+                    <div class="w-full bg-u-dark rounded-full h-2.5 mb-2 overflow-hidden">
+                        <div class="bg-gradient-to-r from-emerald-400 to-u-neon h-2.5 rounded-full transition-all duration-1000 ease-out" 
+                             style="width: <?= $percentage ?>%">
+                        </div>
                     </div>
-                    <p class="text-xs text-u-text-muted text-right">Tersisa 50GB</p>
+                    
+                    <p class="text-xs text-u-text-muted text-right">Tersisa <?= $sisa_storage_gb ?> GB</p>
                 </div>
 
                 <?php if ($role === 'user'): ?>
