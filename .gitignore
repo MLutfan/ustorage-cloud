@@ -1,0 +1,26 @@
+# 1. Konfigurasi Kredensial (SANGAT PENTING)
+config/database.php
+
+# 2. Folder Penyimpanan File Pengguna
+uploads/*
+!uploads/.gitkeep
+trash/*
+!trash/.gitkeep
+
+# 3. Konfigurasi Editor Teks (VS Code, dll)
+.vscode/
+.idea/
+*.suo
+*.sln
+
+# 4. File Sampah Sistem Operasi
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+$RECYCLE.BIN/
+
+# 5. Log Error PHP (Opsional)
+error_log
+*.log
