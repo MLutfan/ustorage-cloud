@@ -94,6 +94,24 @@ ustorage-cloud/
 └── *process.php            # Skrip pemrosesan logika backend (upload, download, auth, dll)
 ```
 
+## Dokumentasi
+### 1. Halaman Login & Register
+![Halaman Login](assets/img/login.png)
+
+![Halaman Register](assets/img/register.png)
+
+### 2. Dashboard User
+![Tampilan Dashboard User](assets/img/user.png)
+
+### 3. Dashboard Admin
+![Tampilan Dashboard Admin](assets/img/admin.png)
+
+### 4. Halaman Profil
+![Tampilan Dashboard Profil](assets/img/profil.png)
+
+### 5. Error 404
+![Tampilan Error 404](assets/img/eror404.png)
+
 ## Penulis
 Dibuat dan dikembangkan oleh Muhammad Lutfan.
 Proyek ini disusun sebagai pemenuhan Tugas Akhir / Ujian Akhir Semester.
