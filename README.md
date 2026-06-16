@@ -107,7 +107,7 @@ ustorage-cloud/
 ![Tampilan Dashboard Admin](assets/img/admin.png)
 
 ### 4. Halaman Profil
-![Tampilan Dashboard Profil](assets/img/profil.png)
+![Tampilan Dashboard Profile](assets/img/profile.png)
 
 ### 5. Error 404
 ![Tampilan Error 404](assets/img/eror404.png)
